@@ -7,15 +7,15 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
 /**
- * `portfolio-sidebar-theme`
+ * `portfolio-screen`
  * 
  * @demo index.html
- * @element portfolio-sidebar-theme
+ * @element portfolio-screen
  */
-export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
+export class PortfolioScreen extends DDDSuper(I18NMixin(LitElement)) {
 
   static get tag() {
-    return "portfolio-sidebar-theme";
+    return "portfolio-screen";
   }
 
   constructor() {
@@ -52,82 +52,31 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
         color: var(--ddd-theme-primary);
         background-color: var(--ddd-theme-accent);
         font-family: var(--ddd-font-navigation);
+        width: 100vw;
+        height: 100vh;
+        
+        
       }
       .wrapper {
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
+        border-bottom: 4px solid white;
+        
+  
+  
       }
       h3 span {
         font-size: var(--portfolio-sidebar-theme-label-font-size, var(--ddd-font-size-s));
       }
-
-      .layout {
-        display: flex;
-        width: 200px;
-        background-color: navy;
-        
-        
-      }
-
-      .sidebar {
-        width: 200px;
-        position: fixed;
-        flex-direction: column;
-        display: flex;
-        gap: 3rem;
-
-      }
-
-      .content {
-        margin-left: 200px;
-        
-      }
-
-
     `];
   }
-
-  updated(changedProperties) 
-  {
-    super.updated(changedProperties);
-
-
-    
-    
-    
-    
-  }
-
-
-  firstUpdated() {
-    const buttons = this.querySelectorAll('.sidebar button');
-
-    buttons.(button => {
-      button.addEventListener('click', (e) => {
-        const targetId = button.dataset.targetId;
-      
-      }
-    })
-  }
-  
-
-
-
 
   // Lit render the HTML
   render() {
     return html`
-<div class="layout">
-  <div class="sidebar">
-    <button data-target="screen-1">Home</button>
-    <button data-target="screen-2">Cv</button> 
-    <button data-target="screen-3">Research</button> 
-    <button data-target="screen-4">Contact</button> 
-    <button data-target="screen-5">About</button>  
-  </div>
-  <div class="content">
+<div class="wrapper">
+  <h3><span>${this.t.title}:</span> ${this.title}</h3>
   <slot></slot>
-  </div>
 </div>`;
   }
 
@@ -140,4 +89,4 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
   }
 }
 
-globalThis.customElements.define(PortfolioSidebarTheme.tag, PortfolioSidebarTheme);
+globalThis.customElements.define(PortfolioScreen.tag, PortfolioScreen);
