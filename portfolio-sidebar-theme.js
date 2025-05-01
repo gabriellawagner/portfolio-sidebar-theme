@@ -6,6 +6,8 @@ import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
+
+
 /**
  * `portfolio-sidebar-theme`
  * 
@@ -50,8 +52,10 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
       :host {
         display: block;
         color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-accent);
+        background-color: navy;
         font-family: var(--ddd-font-navigation);
+        margin-left: -2rem;
+       
       }
       .wrapper {
         margin: var(--ddd-spacing-2);
@@ -63,8 +67,10 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
 
       .layout {
         display: flex;
-        width: 200px;
+        width: 100%;
         background-color: navy;
+        height: 100vh;
+        overflow: hidden;
         
         
       }
@@ -80,8 +86,13 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
 
       .content {
         margin-left: 200px;
+        height: 100vh;
+        
+
         
       }
+
+      
 
 
     `];
@@ -98,18 +109,34 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
     
   }
 
-
   firstUpdated() {
-    const buttons = this.querySelectorAll('.sidebar button');
+    const buttons = this. shadowRoot.querySelectorAll('.sidebar button');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-target');
+        this.scrollTo(targetId);
+      });
+    });
 
-    buttons.(button => {
-      button.addEventListener('click', (e) => {
-        const targetId = button.dataset.targetId;
-      
-      }
-    })
+    this.handleHashNav();
+    window.addEventListener('hashchange', () => this.handleHashNav());
   }
+
   
+  scrollTo(id) {
+    const el = document.getElementById(id);
+    if(el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+      history.pushState(null, '', `#${id}`);
+    }
+  }
+
+  handleHashNav() {
+    const id = location.hash.replace('#', '');
+    if (id) {
+      setTimeout(() => this.scrollTo(id), 100);
+    }
+  }
 
 
 
@@ -125,10 +152,11 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
     <button data-target="screen-4">Contact</button> 
     <button data-target="screen-5">About</button>  
   </div>
-  <div class="content">
-  <slot></slot>
+  <div class="content"> 
+    <slot></slot>
   </div>
 </div>`;
+
   }
 
   /**

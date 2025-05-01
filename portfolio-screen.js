@@ -54,6 +54,9 @@ export class PortfolioScreen extends DDDSuper(I18NMixin(LitElement)) {
         font-family: var(--ddd-font-navigation);
         width: 100vw;
         height: 100vh;
+        box-sizing: border-box;
+        padding-left: 8rem;
+        background-color: transparent;
         
         
       }
@@ -61,7 +64,11 @@ export class PortfolioScreen extends DDDSuper(I18NMixin(LitElement)) {
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
         border-bottom: 4px solid white;
+        background-color: var(--ddd-theme-accent);
+        min-height: 100vh;
+        margin-left: 40px;
         
+       
   
   
       }
