@@ -9,8 +9,8 @@
 
   <style>
     :root, html, body {
-      margin: 0;
-      padding: 0;
+      margin: var(--ddd-spacing-0);
+      padding: var(--ddd-spacing-0);
     }
     #demo {
       margin: var(--ddd-spacing-2);
@@ -28,6 +28,147 @@
       background-color: var(--ddd-accent-2);
       color: var(--ddd-primary-17);
     }
+
+    portfolio-screen {
+      min-height: 100vh;
+    }
+
+    
+    image-banner, simple-cta {
+     display: block;
+     min-height: 200px;
+    }
+
+simple-cta {
+  color: var(--ddd-theme-text); 
+  z-index: var(--ddd-zindex-modal);
+  font-size: var(--ddd-font-size-sm);
+  visibility: visible !important;
+  margin-top: var(--ddd-spacing-6);;
+  background-color: var(--ddd-theme-default-shrineMaxLight);
+}
+
+#simpleCtaWrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: var(--ddd-spacing-30);
+  padding: var(--ddd-spacing-15);
+  
+}
+
+
+
+.home-logo {
+  width: 100px;
+  height: 100px;
+  align-items: center;
+  border-radius: 50%;
+  border: var(--ddd-border-sm);
+  border-color: var(--ddd-theme-default-white);
+  
+}
+
+.home-title {
+  text-align: center;
+  font-size: var(--ddd-font-size-xl);
+  font-weight: var(--ddd-fontWeight-bold);
+  font-family: var(--ddd-font-heading);
+  
+}
+
+.home-description {
+  text-align: center;
+  font-size: var(--ddd-font-size-xs);
+  padding-top: var(--ddd-spacing-30);
+
+}
+
+.logo-container {
+  background-color: var(--ddd-theme-default-original87Pink);
+  padding: var(--ddd-spacing-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 70%;
+  width: 150;
+  height: 250;
+  align-items: center;
+  justify-content: center;
+  margin: var(--ddd-spacing-0);
+  overflow: hidden;
+}
+
+.home-image {
+  width: 250px;
+  height: 250px;
+  margin-top: 50px;
+  border: var(--ddd-border-sm);
+  border-color: var(--ddd-theme-default-black);
+  border-radius: 0px;
+  
+}
+
+.home-content {
+  display: flex;
+  gap: var(--ddd-spacing-4);
+}
+
+.cv-container h1 {
+  font-size: var(--ddd-font-size-m);
+}
+
+.cv-container h3 {
+  font-size: var(--ddd-font-size-m);
+}
+
+
+.cv-container h4 {
+  font-size: var(--ddd-font-size-m);
+}
+
+
+.cv-container h5 {
+  font-size: var(--ddd-font-size-m);
+}
+
+.cv-container {
+  padding: var(--ddd-spacing-6);
+  margin-left: 70px;
+}
+
+.figure-container img {
+  max-width: 500px;
+  align-items: center;
+}
+
+.aboutWrapper {
+  padding: var(--ddd-spacing-5);
+  align-items: center;
+}
+
+.figure-container {
+  padding-top: var(--ddd-spacing-6);
+}
+
+details summary:hover {
+  cursor: pointer;
+  color: var(--ddd-theme-default-original87Pink);
+  text-decoration: underline;
+}
+
+.figure-container a figcaption {
+
+  padding-top: var(--ddd-spacing-0);
+
+}
+
+.figure-container a:hover figcaption {
+  color: var(--ddd-theme-default-info);
+  text-decoration: underline;
+}
+
+
+
   </style>
   <title>portfolio-sidebar-theme</title>
 </head>
@@ -35,22 +176,102 @@
 <body>
   <div id="demo">
     <h1>portfolio-sidebar-theme</h1>
-  
-    <h2>Default</h2>
     <portfolio-sidebar-theme>
-      <portfolio-screen title="About">
-        <p>This is my about section</p>
+      <portfolio-screen id="screen-1" title="Home" style="--ddd-theme-accent: var(--ddd-theme-default-slateMaxLight);">
+        <div class="home-container">
+            <div class="logo-container">
+              <img src="https://www.underconsideration.com/brandnew/archives/remax_balloon_real.jpg" alt="Logo" class="home-logo" />
+              <h1 class="home-title">PortFolio</h1>
+            </div>
+            <div class="home-content">
+              <img src="https://photos.zillowstatic.com/fp/c761c7ac75f024a852a5f8518b5e4221-h_l.jpg" alt="Jamie Wagner" class="home-image">
+              <p class="home-description">Jamie Wagner is a dedicated real estate professional based in Exton, PA, specializing in residential properties throughout Chester County. </p>
+            </div>
+        </div>
       </portfolio-screen>
-      <portfolio-screen id="screen-1" title="Home" style="--ddd-theme-accent: var(--ddd-theme-default-slateMaxLight);"></portfolio-screen>
-      <portfolio-screen id="screen-2" title="CV" style="--ddd-theme-accent: var(--ddd-theme-default-skyMaxLight);"></portfolio-screen>
-      <portfolio-screen id="screen-3" title="Research" style="--ddd-theme-accent: var(--ddd-theme-default-white);"></portfolio-screen>
-      <portfolio-screen id="screen-4" title="Contact" style="--ddd-theme-accent: var(--ddd-theme-default-shrineLight);"></portfolio-screen>
-      <portfolio-screen id="screen-5" title="About" style="--ddd-theme-accent: var(--ddd-theme-default-roarMaxlight);"></portfolio-screen>
+      <portfolio-screen id="screen-2" title="CV" style="--ddd-theme-accent: var(--ddd-theme-default-skyMaxLight);">
+        <div class="cv-container">
+          <h1>Work Experience:</h1>
+          <ul>
+            <li>25 years</li>
+          </ul>
+          <h2>Education:</h2>
+          <ul>
+            <li>Penn State Degree</li>
+          </ul>
+          <h3>Skill:</h3>
+          <ul>
+            <li>Property Valuation</li>
+            <li>Client Relationship Management</li>
+            <li>Marketing & Social Media Outreach</li>
+          </ul>
+          <h4>Projects:</h4>
+          <ul>
+            <li>Exton Home Showcase 2024</li>
+            <li>First-Time Buyer Series</li>
+          </ul>
+          <h5>Publications:</h5>
+          <ul>
+            <li>Published insights on market trends, buyer behaviors, and future predictions.
+          </ul>
+        </div>
+      </portfolio-screen>
+      <portfolio-screen id="screen-3" title="Research" style="--ddd-theme-accent: var(--ddd-theme-default-skyLight);"> 
+        <div id="imageBannerWrapper">
+          <image-banner
+          heading="2025 Real Estate Market Trends"
+          text="Analyzing trends in Chester County to better server buyers and sellers."
+          image-src="https://images.prismic.io/tragorealty/Z_e3rOvxEdbNO2N1_2025-4-7-TRG-Blog-ChesCoSales-Graph-March.png?auto=format%2Ccompress&fit=max&w=3840"
+          image-alt="Real Estate Market">
+         </image-banner>
+        </div>
+      </portfolio-screen>
+      <portfolio-screen id="screen-4" title="Contact" style="--ddd-theme-accent: var(--ddd-theme-default-shrineLight);" >
+        <div id="simpleCtaWrapper"> 
+          <simple-cta
+             image-src="https://www.printelf.com/assets/designs/5950_remax-real-estate-balloon-logo.png"
+             image-alt="REMAX Exton, PA"
+             title="Office Location:"
+             title2="Phone Number:"
+             description="403 W Lincoln Hwy. Ste. 101 Exton, PA 19341"
+             description2="610-363-4077"
+             link="https://jwagner.engagereagent.com/"
+             link-label="jamiewagner.com">
+        </simple-cta>
+        </div> 
+      </portfolio-screen>
+      <portfolio-screen id="screen-5" title="About" style="--ddd-theme-accent: var(--ddd-theme-default-accent);">
+        <div class="aboutWrapper">
+        <div class="aboutContent">
+          <p>Jamie Wagner is a trusted real estate professional with deep roots in Chester County, PA. One of his favorite communities, both professionally and personally, is Applecross Country Club in Downingtown.</p>
+        </div>
+      <div class="figure-container">
+        <figure>
+          <img src="https://golf-pass.brightspotcdn.com/dims4/default/443ed48/2147483647/strip/true/crop/1440x929+0+15/resize/930x600!/format/webp/quality/90/?url=https%3A%2F%2Fgolf-pass-brightspot.s3.amazonaws.com%2Fbc%2Fbf%2F40479142c0c5ddd63034c2c39fc4%2F122975.jpg" alt="Apple Cross Country Club" />
+          <a href="https://applecrosscc.com/">
+            <figcaption>Apple Cross Country Club</figcaption>
+          </a>
+        </figure>
+      </div>
+    </div>
+      <div class="aboutContent">
+        <details>
+          <summary>Apple Cross Country Club </summary>
+          <p>Applecross Country Club is a premier golf and lifestyle community located in Downingtown, PA. Jamie has been buying and selling houses here for over 20 plus years!</p>
+        </details>
+      </div>
+      </portfolio-screen>
     </portfolio-sidebar-theme>
 
+    <scroll-button style="position: fixed; bottom: 1rem; right: 1rem; z-index: 10;"></scroll-button>
+
+    
   </div>
   <script type="module" src="./portfolio-sidebar-theme.js"></script>
   <script type="module" src="./portfolio-screen.js"></script>
+  <script type="module" src="https://cdn.hax.cloud/cdn/build/es6/node_modules/@haxtheweb/scroll-button/scroll-button.js"></script>
+  <script type="module" src="./simple-cta.js"></script>
+  <script type="module" src="./image-banner.js"></script>
 
 </body>
 </html>

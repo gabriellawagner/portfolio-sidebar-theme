@@ -56,19 +56,26 @@ export class PortfolioScreen extends DDDSuper(I18NMixin(LitElement)) {
         height: 100vh;
         box-sizing: border-box;
         padding-left: 8rem;
-        background-color: transparent;
+        background: transparent;
+        padding-right: var(--ddd-spacing-2);
         
         
       }
       .wrapper {
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
-        border-bottom: 4px solid white;
+        border-bottom: var(--ddd-border-lg);
+        border-color: var(--ddd-theme-default-white);
         background-color: var(--ddd-theme-accent);
         min-height: 100vh;
         margin-left: 40px;
-        
        
+       h3 {
+        font-size: var(--ddd-font-size-xl);
+        padding: var(--ddd-spacing-3);
+        margin-left: var(--ddd-spacing-5);
+        
+       }
   
   
       }
@@ -82,7 +89,7 @@ export class PortfolioScreen extends DDDSuper(I18NMixin(LitElement)) {
   render() {
     return html`
 <div class="wrapper">
-  <h3><span>${this.t.title}:</span> ${this.title}</h3>
+    <h3>${this.title}</h3>  
   <slot></slot>
 </div>`;
   }

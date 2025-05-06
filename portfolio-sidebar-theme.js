@@ -8,6 +8,8 @@ import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 
 
 
+
+
 /**
  * `portfolio-sidebar-theme`
  * 
@@ -52,7 +54,7 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
       :host {
         display: block;
         color: var(--ddd-theme-primary);
-        background-color: navy;
+        background-color: var(--ddd-theme-default-slateGray);
         font-family: var(--ddd-font-navigation);
         margin-left: -2rem;
        
@@ -68,9 +70,9 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
       .layout {
         display: flex;
         width: 100%;
-        background-color: navy;
+        background-color: var(--ddd-theme-default-slateGray);
         height: 100vh;
-        overflow: hidden;
+       
         
         
       }
@@ -80,19 +82,111 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
         position: fixed;
         flex-direction: column;
         display: flex;
-        gap: 3rem;
+        gap: var(--ddd-spacing-13);
+        z-index: 1;
+        background-color: var(--ddd-theme-default-slateGray);
+       
 
       }
 
       .content {
-        margin-left: 200px;
+  
         height: 100vh;
-        
+        overflow-y: scroll;
+        scroll-snap-type: y mandatory;
+        z-index: 0;
 
         
       }
 
+      ::slotted(portfolio-screen) {
+        scroll-snap-align: start;
+        height: 100vh;
+      }
       
+      .sidebar button.active {
+        background-color: var(--ddd-theme-primary);
+        color: var(--ddd-theme-default-white);
+        font-weight: var(--ddd-fontWeight-bold);
+        border-left: var(--ddd-border-lg);
+        border-color: var(--ddd-theme-default-white);
+      }
+
+      .sidebar button {
+        border-radius: var(--ddd-radius-xl);
+        cursor: pointer;
+
+      }
+
+      .sidebar button:hover {
+        background-color: var(--ddd-theme-default-original87Pink)
+      }
+
+      .sidebar button:focus {
+        background-color: var(--ddd-theme-default-beaverBlue)
+      }
+
+      @media (max-width: 768px)  {
+        .layout {
+          flex-direction: column;
+        }
+
+        .sidebar {
+          flex-direction: row;
+          width: 100%;
+          height: auto;
+          position: static;
+          justify-content: space-around;
+          padding: var(--ddd-spacing-4);
+          padding-top: var(--ddd-spacing-8);
+          gap: var(--ddd-spacing-2);
+        }
+
+        .sidebar button {
+          flex: 1;
+          font-size: var(--ddd-font-size-s);
+          border-radius: var(--ddd-radius-lg);
+
+        }
+
+        .content {
+          height: auto;
+          overflow-y: auto;
+        }
+
+        ::slotted(portfolio-screen) {
+          height: auto;
+          scroll-snap-align: none;
+        }
+
+        .home-content {
+          flex-direction: column;
+          align-items: center;
+          gap:  var(--ddd-spacing-3);
+        }
+
+        .home-image {
+          width: 90vw;
+          height: auto;
+
+        }
+
+        .logo-container {
+          width: 200px;
+          height: 200px;
+          border-radius:50%;
+        }
+
+        .figure-container img {
+          width: 90%;
+          max-width: 400px;
+        }
+
+        .aboutWrapper, .cv-container {
+          padding: var(--ddd-spacing-3);
+        }
+
+      }
 
 
     `];
@@ -118,6 +212,9 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
       });
     });
 
+    this.shadowRoot.querySelector('.content')?.addEventListener('scroll', () => this.highlightActiveSection());
+
+
     this.handleHashNav();
     window.addEventListener('hashchange', () => this.handleHashNav());
   }
@@ -128,6 +225,7 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
     if(el) {
       el.scrollIntoView({ behavior: 'smooth' });
       history.pushState(null, '', `#${id}`);
+      this.highlightActiveSection();
     }
   }
 
@@ -136,6 +234,32 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
     if (id) {
       setTimeout(() => this.scrollTo(id), 100);
     }
+  }
+
+  highlightActiveSection() {
+    const content = this.shadowRoot.querySelector('.content');
+    const buttons = this.shadowRoot.querySelectorAll('.sidebar button');
+    const sections = Array.from(this.querySelectorAll('portfolio-screen'));
+    let currentId = '';
+    let minDist = 10;
+
+    sections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      if (rect.top >= 0 && rect.top < minDist) {
+        minDist = rect.top;
+        currentId = section.id;
+      }
+    });
+
+    buttons.forEach((btn) => {
+      if (btn.getAttribute('data-target') === currentId) {
+        btn.classList.add('active');
+      }
+      else 
+      {
+        btn.classList.remove('active');
+      }
+    });
   }
 
 
@@ -155,7 +279,10 @@ export class PortfolioSidebarTheme extends DDDSuper(I18NMixin(LitElement)) {
   <div class="content"> 
     <slot></slot>
   </div>
-</div>`;
+</div>
+
+
+`;
 
   }
 
